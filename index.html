@@ -13,10 +13,22 @@
   <script src="https://use.fontawesome.com/594de86a37.js"></script>
   <script>
     let google = "https://www.google.co.kr/search?q=";
-    let search90s = "&tbs=cdr:1,cd_min:1990. 1. 1.,cd_max:1999. 12. 31.";
-    let search00s = "&tbs=cdr:1,cd_min:2000. 1. 1.,cd_max:2009. 12. 31.";
-    let search10s = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2019. 12. 31.";
-    let searchNews = "&tbm=nws";
+    let query90s = "&tbs=cdr:1,cd_min:1990. 1. 1.,cd_max:1999. 12. 31.";
+    let query00s = "&tbs=cdr:1,cd_min:2000. 1. 1.,cd_max:2009. 12. 31.";
+    let query10s = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2019. 12. 31.";
+    let query1014s = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2014. 12. 31.";
+    let query1519s = "&tbs=cdr:1,cd_min:2015. 1. 1.,cd_max:2019. 12. 31.";
+    let query2010 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2010. 12. 31.";
+    let query2011 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2011. 12. 31.";
+    let query2012 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2012. 12. 31.";
+    let query2013 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2013. 12. 31.";
+    let query2014 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2014. 12. 31.";
+    let query2015 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2015. 12. 31.";
+    let query2016 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2016. 12. 31.";
+    let query2017 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2017. 12. 31.";
+    let query2018 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2018. 12. 31.";
+    let query2019 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2019. 12. 31.";
+    let queryNews = "&tbm=nws";
 
     window.onload = function () {
       document.getElementById('searchText').addEventListener('keyup', function (event) {
@@ -27,41 +39,89 @@
       });
     }
 
-    function search() {
-      let textToSearch = document.getElementById('searchText').value;
-      if (textToSearch === '') {
+    function search(id) {
+      let inputValue = document.getElementById('searchText').value;
+      let queryToSearch = undefined;
+      if (inputValue === '') {
         alert("enter text");
+        return;
       }
-      window.open(google + textToSearch + searchNews, "_blank");
+      switch(id) {
+        case 'search90s':
+          queryToSearch = query90s;
+          break;
+        case 'search00s':
+          queryToSearch = query00s;
+          break;
+        case 'search10s':
+          queryToSearch = query10s;
+          break;
+        case 'search1014s':
+          queryToSearch = query1014s;
+          break;
+        case 'search1519s':
+          queryToSearch = query1519s;
+          break;
+        case 'search2010':
+          queryToSearch = query2010;
+          break;
+        case 'search2011':
+          queryToSearch = query2011;
+          break;
+        case 'search2012':
+          queryToSearch = query2012;
+          break;
+        case 'search2013':
+          queryToSearch = query2013;
+          break;
+        case 'search2014':
+          queryToSearch = query2014;
+          break;
+        case 'search2015':
+          queryToSearch = query2015;
+          break;
+        case 'search2016':
+          queryToSearch = query2016;
+          break;
+        case 'search2017':
+          queryToSearch = query2017;
+          break;
+        default:
+          queryToSearch = '';
+      }
+      queryToSearch = google + inputValue + queryToSearch + queryNews;
+      window.open(queryToSearch, "_blank");
     }
-
     </script>
 
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">News</a>
+          <a class="navbar-brand" href="#">NewsFinder</a>
         </div>
-        <form class="navbar-form navbar-left">
+        <form class="navbar-form navbar-left" onsubmit="return false">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" id="searchText">
             <div class="input-group-btn">
-              <button type="submit" class="btn btn-primary" id="searchButton" onclick="search()">
-                <i class="fa fa-search"></i>
-              </button>
+              <button type="submit" class="btn btn-primary" id="searchAll" onclick="search(this.id)">All</button>
+              <button type="submit" class="btn" id="search90s" onclick="search(this.id)">1990~1999</button>
+              <button type="submit" class="btn" id="search00s" onclick="search(this.id)">2000~2009</button>
+              <button type="submit" class="btn" id="search1014s" onclick="search(this.id)">2010~2014</button>
+              <button type="submit" class="btn" id="search1519s" onclick="search(this.id)">2015~2019</button><br>
+              <button type="submit" class="btn" id="search2010" onclick="search(this.id)">2010</button>
+              <button type="submit" class="btn" id="search2011" onclick="search(this.id)">2011</button>
+              <button type="submit" class="btn" id="search2012" onclick="search(this.id)">2012</button>
+              <button type="submit" class="btn" id="search2013" onclick="search(this.id)">2013</button>
+              <button type="submit" class="btn" id="search2014" onclick="search(this.id)">2014</button>
+              <button type="submit" class="btn" id="search2015" onclick="search(this.id)">2015</button>
+              <button type="submit" class="btn" id="search2016" onclick="search(this.id)">2016</button>
+              <button type="submit" class="btn" id="search2017" onclick="search(this.id)">2017</button>
             </div>
           </div>
         </form>
       </div>
     </nav>
 
-    <div class="container" id="ButtonFiled">
-      <button class="btn btn-primary" type="button" id="buttonAll">All</button>
-      <button class="btn" type="button" id="button90s">1990 ~ 1999</button>
-      <button class="btn" type="button" id="button00s">2000 ~ 2009</button>
-      <button class="btn" type="button" id="button10s">2010 ~ 2019</button>
-    </div>
-    <a target="_blank" href="https://www.google.html">google</a>
     <footer>© 2017 5sori</footer>
   </body>
   </html>
