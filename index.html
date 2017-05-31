@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>news</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/594de86a37.js"></script>
+  <script>
+    let google = "https://www.google.co.kr/search?q=";
+    let search90s = "&tbs=cdr:1,cd_min:1990. 1. 1.,cd_max:1999. 12. 31.";
+    let search00s = "&tbs=cdr:1,cd_min:2000. 1. 1.,cd_max:2009. 12. 31.";
+    let search10s = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2019. 12. 31.";
+    let searchNews = "&tbm=nws";
+
+    window.onload = function () {
+      document.getElementById('searchText').addEventListener('keyup', function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          document.getElementById('searchButton').click;
+        }
+      });
+    }
+
+    function search() {
+      let textToSearch = document.getElementById('searchText').value;
+      if (textToSearch === '') {
+        alert("enter text");
+      }
+      window.open(google + textToSearch + searchNews, "_blank");
+    }
+
+    </script>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">News</a>
+        </div>
+        <form class="navbar-form navbar-left">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" id="searchText">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-primary" id="searchButton" onclick="search()">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container" id="ButtonFiled">
+      <button class="btn btn-primary" type="button" id="buttonAll">All</button>
+      <button class="btn" type="button" id="button90s">1990 ~ 1999</button>
+      <button class="btn" type="button" id="button00s">2000 ~ 2009</button>
+      <button class="btn" type="button" id="button10s">2010 ~ 2019</button>
+    </div>
+    <a target="_blank" href="https://www.google.html">google</a>
+    <footer>© 2017 5sori</footer>
+  </body>
+  </html>
