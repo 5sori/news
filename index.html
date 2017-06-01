@@ -10,28 +10,17 @@
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="https://use.fontawesome.com/594de86a37.js"></script>
   <script>
-    let google = "https://www.google.co.kr/search?q=";
-    let query90s = "&tbs=cdr:1,cd_min:1990. 1. 1.,cd_max:1999. 12. 31.";
-    let query00s = "&tbs=cdr:1,cd_min:2000. 1. 1.,cd_max:2009. 12. 31.";
-    let query10s = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2019. 12. 31.";
-    let query1014s = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2014. 12. 31.";
-    let query1519s = "&tbs=cdr:1,cd_min:2015. 1. 1.,cd_max:2019. 12. 31.";
-    let query2010 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2010. 12. 31.";
-    let query2011 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2011. 12. 31.";
-    let query2012 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2012. 12. 31.";
-    let query2013 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2013. 12. 31.";
-    let query2014 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2014. 12. 31.";
-    let query2015 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2015. 12. 31.";
-    let query2016 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2016. 12. 31.";
-    let query2017 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2017. 12. 31.";
-    let query2018 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2018. 12. 31.";
-    let query2019 = "&tbs=cdr:1,cd_min:2010. 1. 1.,cd_max:2019. 12. 31.";
-    let queryNews = "&tbm=nws";
+    const google = "https://www.google.co.kr/search?q=";
+    const queryNews = "&tbm=nws";
+
+    let query2019 = "&tbs=cdr:1,cd_min:2019. 1. 1.,cd_max:2019. 12. 31.";
+    let inputValue = '';
+    let queryToSearch = '';
 
     window.onload = function () {
-      document.getElementById('searchText').addEventListener('keyup', function (event) {
+      document.getElementById('searchText')
+      .addEventListener('keyup', function (event) {
         event.preventDefault();
         if (event.keyCode === 13) {
           document.getElementById('searchButton').click;
@@ -39,83 +28,107 @@
       });
     }
 
+    function searchRange(start, end) {
+      queryToSearch = google + inputValue + "&tbs=cdr:1,cd_min:"
+        + start + ". 1. 1.,cd_max:" + end + ". 12. 31."
+        + queryNews;
+      window.open(queryToSearch, "_blank");
+    }
+
     function search(id) {
-      let inputValue = document.getElementById('searchText').value;
-      let queryToSearch = undefined;
+      inputValue = document.getElementById('searchText').value;
       if (inputValue === '') {
         alert("enter text");
         return;
       }
       switch(id) {
         case 'search90s':
-          queryToSearch = query90s;
+          searchRange(1990,1999);
           break;
         case 'search00s':
-          queryToSearch = query00s;
+          searchRange(2000,2009);
           break;
         case 'search10s':
-          queryToSearch = query10s;
+          searchRange(2010,2019);
+          break;
+        case 'search9599s':
+          searchRange(1995,1999);
+          break;
+        case 'search0004s':
+          searchRange(2000,2004);
+          break;
+        case 'search0509s':
+          searchRange(2005,2009);
           break;
         case 'search1014s':
-          queryToSearch = query1014s;
+          searchRange(2010,2014);
           break;
         case 'search1519s':
-          queryToSearch = query1519s;
+          searchRange(2015,2019);
           break;
         case 'search2010':
-          queryToSearch = query2010;
+          searchRange(2010,2010);
           break;
         case 'search2011':
-          queryToSearch = query2011;
+          searchRange(2011,2011);
           break;
         case 'search2012':
-          queryToSearch = query2012;
+          searchRange(2012,2012);
           break;
         case 'search2013':
-          queryToSearch = query2013;
+          searchRange(2013,2013);
           break;
         case 'search2014':
-          queryToSearch = query2014;
+          searchRange(2014,2014);
           break;
         case 'search2015':
-          queryToSearch = query2015;
+          searchRange(2015,2015);
           break;
         case 'search2016':
-          queryToSearch = query2016;
+          searchRange(2016,2016);
           break;
         case 'search2017':
-          queryToSearch = query2017;
+          searchRange(2017,2017);
           break;
         default:
-          queryToSearch = '';
+          queryToSearch = google + inputValue + queryNews;
+          window.open(queryToSearch, "_blank");
       }
-      queryToSearch = google + inputValue + queryToSearch + queryNews;
-      window.open(queryToSearch, "_blank");
+
     }
     </script>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar sticky-top navbar-default">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">NewsFinder</a>
-        </div>
         <form class="navbar-form navbar-left" onsubmit="return false">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" id="searchText">
+          <div class="input-group" width="95%">
+            <input type="text" class="form-control" placeholder="NewsFinder" id="searchText"><br>
             <div class="input-group-btn">
               <button type="submit" class="btn btn-primary" id="searchAll" onclick="search(this.id)">All</button>
-              <button type="submit" class="btn" id="search90s" onclick="search(this.id)">1990~1999</button>
-              <button type="submit" class="btn" id="search00s" onclick="search(this.id)">2000~2009</button>
-              <button type="submit" class="btn" id="search1014s" onclick="search(this.id)">2010~2014</button>
-              <button type="submit" class="btn" id="search1519s" onclick="search(this.id)">2015~2019</button><br>
-              <button type="submit" class="btn" id="search2010" onclick="search(this.id)">2010</button>
-              <button type="submit" class="btn" id="search2011" onclick="search(this.id)">2011</button>
-              <button type="submit" class="btn" id="search2012" onclick="search(this.id)">2012</button>
-              <button type="submit" class="btn" id="search2013" onclick="search(this.id)">2013</button>
-              <button type="submit" class="btn" id="search2014" onclick="search(this.id)">2014</button>
-              <button type="submit" class="btn" id="search2015" onclick="search(this.id)">2015</button>
-              <button type="submit" class="btn" id="search2016" onclick="search(this.id)">2016</button>
-              <button type="submit" class="btn" id="search2017" onclick="search(this.id)">2017</button>
+              <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <button type="submit" class="btn btn-xs btn-secondary" id="search90s" onclick="search(this.id)">90s</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search00s" onclick="search(this.id)">00s</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search10s" onclick="search(this.id)">10s</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search9599s" onclick="search(this.id)">95~99</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search0004s" onclick="search(this.id)">00~04</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search0509s" onclick="search(this.id)">05~09</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search1014s" onclick="search(this.id)">10~14</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search1519s" onclick="search(this.id)">15~19</button>
+                <li role="separator" class="divider"></li>
+                <li role="separator" class="divider"></li>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2010" onclick="search(this.id)">2010</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2011" onclick="search(this.id)">2011</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2012" onclick="search(this.id)">2012</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2013" onclick="search(this.id)">2013</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2014" onclick="search(this.id)">2014</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2015" onclick="search(this.id)">2015</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2016" onclick="search(this.id)">2016</button>
+                <button type="submit" class="btn btn-xs btn-secondary" id="search2017" onclick="search(this.id)">2017</button>
+              </ul>
             </div>
           </div>
         </form>
